@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
 import contactsRoutes from './routers/contacts.js';
-import authRoutes from "./routers/auth.js";
+import userRoutes from "./routers/user.js";
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { auth } from './middlewares/auth.js';
@@ -37,7 +37,7 @@ app.use(cookieParser());
 
 app.use('/contacts', auth, contactsRoutes);
 
-app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.use('*', notFoundHandler);
 

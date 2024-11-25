@@ -22,6 +22,10 @@ export async function registerUser(payload){
     throw createHttpError(409, "Email is already in use");
    }
 
+   const emailName = payload.email.split('@')[0];
+   payload.name = emailName;
+
+
    payload.password = await bcrypt.hash(payload.password, 10);
 
    return User.create(payload);
@@ -56,6 +60,33 @@ export async function loginUser(email, password) {
       refreshTokenValidUntil: new Date(Date.now() + 24 * 60 * 60 * 1000),
     });
 }
+
+
+export async function getUser(userId) {
+
+  const user = await User.findById(userId);
+
+  return user;
+}
+
+export const patchUser = async (id, payload, options = {}) => {
+  const rawResult = await User.findOneAndUpdate(
+    { _id: id },
+    payload,
+    {
+      new: true,
+      upsert: false,
+      ...options,
+    },
+  );
+
+  if (!rawResult) return null;
+
+  return {
+    user: rawResult,
+    isNew: !rawResult.createdAt || rawResult.createdAt === rawResult.updatedAt,
+  };
+};
 
 export function logoutUser(sessionId){
   Session.deleteOne({_id: sessionId});

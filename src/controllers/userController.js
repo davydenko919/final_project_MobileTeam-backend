@@ -1,10 +1,10 @@
 import createHttpError from 'http-errors';
-import { registerUser, loginUser, logoutUser, refreshSession, requestResetToken } from '../services/authService.js';
-import { resetPassword } from '../services/authService.js';
+import { registerUser, loginUser, logoutUser, refreshSession, requestResetToken, getUser, patchUser } from '../services/userService.js';
+import { resetPassword } from '../services/userService.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
 export async function registerController(req, res) {
   const payload = {
-    name: req.body.name,
     email: req.body.email,
     password: req.body.password,
   };
@@ -27,7 +27,7 @@ export async function loginController(req, res) {
     httpOnly: true,
     expires: session.refreshTokenValidUntil,
   });
- 
+
   res.status(201).send({
     status: 200,
     message: 'Login completed',
@@ -36,6 +36,61 @@ export async function loginController(req, res) {
     },
   });
 }
+
+export async function infoController(req, res) {
+  const { user: { id: userId } } = req;
+  const contacts = await getUser(userId);
+  res.json({
+    status: 200,
+    message: "Successfully found contacts!",
+    data: contacts,
+  });
+}
+
+export const patchUserController = async (req, res, next) => {
+  // const { id } = req.params;
+  const { user: { id: id } } = req;
+
+
+  const photo = req.file;
+
+  console.log(photo);
+
+
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
+  console.log(photoUrl);
+
+
+  const user = {
+    name: req.body.name,
+    email: req.body.email,
+    gender: req.body.gender,
+    weight: req.body.weight,
+    sportHours: req.body.sportHours,
+    waterNorm: req.body.waterNorm,
+    photo: photoUrl,
+  };
+
+  const result = await patchUser(id, user );
+
+
+  if (result === null) {
+    next(createHttpError(404, 'User not found'));
+
+    return;
+  }
+
+  res.json({
+    status: 200,
+    message: `Successfully patched a user!`,
+    data: result.user,
+  });
+};
+
 
 export async function logoutController(req, res) {
     const { sessionId } = req.cookies;
@@ -80,8 +135,7 @@ export async function refreshController(req, res) {
 };
 
 export const requestResetEmailController = async (req, res) => {
-  // console.log(req.body);
-  
+
   await requestResetToken(req.body.email);
   res.json({
     message: 'Reset password email was successfully sent!',

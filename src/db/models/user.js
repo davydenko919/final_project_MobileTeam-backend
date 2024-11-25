@@ -2,18 +2,30 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     name: {
-        type: String, 
-        required: true ,
+        type: String,
     },
     email: {
         type: String,
         required: true,
-        unique: true,
     },
     password: {
         type: String,
         required: true,
-    }
+    },
+    gender:{
+        type: String,
+        enum: ["woman", "man",],
+        default: "woman"
+    },
+    weight: {
+        type: Number,
+    },
+    sportHours: {
+        type: Number,
+    },
+    photo: {
+        type: String,
+    },
 },{
     versionKey: false, timestamps: true,
 });

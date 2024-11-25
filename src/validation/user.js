@@ -1,7 +1,6 @@
 import Joi from 'joi';
 
 export const registerSchema = Joi.object({
-  name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required(),
 });
@@ -19,3 +18,13 @@ export const resetPasswordSchema = Joi.object({
   password: Joi.string().required(),
   token: Joi.string().required(),
 });
+
+export const updateUserSchema = Joi.object({
+    name: Joi.string().min(3).max(30),
+    email: Joi.string().email().required(),
+    gender: Joi.string().valid('woman', 'man'),
+    weight: Joi.number(),
+    sportHours: Joi.number(),
+    waterNorm: Joi.number(),
+    photo: Joi.string().uri(),
+  });
