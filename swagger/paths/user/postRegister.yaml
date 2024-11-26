@@ -1,0 +1,79 @@
+tags:
+  - User
+summary: Register user
+operationId: registerController
+description: 'Register a new user by providing email and password. The email must be unique, and the password will be securely hashed before storing in the database.'
+security: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            description: "User's email address"
+            type: string
+            example: 'jane.doe@example.com'
+          password:
+            description: "User's password"
+            type: string
+            example: 'awfawfawf'
+responses:
+  '201':
+    description: 'User registered'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'User registered'
+            data:
+              type: object
+              required:
+                - name
+                - email
+                - gender
+                - _id
+                - createdAt
+                - updatedAt
+              properties:
+                name:
+                  type: string
+                  example: 'usser'
+                  description: "The name of the registered user."
+                email:
+                  type: string
+                  example: 'usser@gmail.com'
+                  description: "The email address of the registered user."
+                gender:
+                  type: string
+                  example: 'woman'
+                  description: "The gender of the registered user."
+                _id:
+                  type: string
+                  example: '67460c7d58af97571b29b893'
+                  description: "The unique identifier of the user."
+                createdAt:
+                  type: string
+                  format: date-time
+                  example: '2024-11-26T17:59:25.698Z'
+                  description: "Timestamp when the user was created."
+                updatedAt:
+                  type: string
+                  format: date-time
+                  example: '2024-11-26T17:59:25.698Z'
+                  description: "Timestamp when the user was last updated."
+  '409':
+    $ref: '../../components/responses/409.yaml'

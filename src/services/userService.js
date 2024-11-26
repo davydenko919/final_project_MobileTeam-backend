@@ -37,7 +37,7 @@ export async function loginUser(email, password) {
 
    if (user === null) {
      // throw createHttpError(404, "User not found");
-     throw createHttpError(401, 'Email or password is incorrect');
+     throw createHttpError(404, 'User not found');
    }
 
    const isMatch = await bcrypt.compare(password, user.password);
