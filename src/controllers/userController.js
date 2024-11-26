@@ -37,13 +37,16 @@ export async function loginController(req, res) {
   });
 }
 
-export async function infoController(req, res) {
+export async function infoController(req, res, next) {
   const { user: { id: userId } } = req;
-  const contacts = await getUser(userId);
+  const user = await getUser(userId);
+  if (!user) {
+    return next(createHttpError(404, 'User not found'));
+  }
   res.json({
     status: 200,
-    message: "Successfully found contacts!",
-    data: contacts,
+    message: "Successfully found user!",
+    data: user,
   });
 }
 
