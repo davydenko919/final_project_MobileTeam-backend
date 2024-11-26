@@ -1,20 +1,20 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Contacts app
+  title: TrackWaterAppDoc
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description:
-    This is a documentation of Contacts app
+    This is a documentation of TrackWaterApp
 tags:
-  - name: Contacts
-    description: Operations about users.
+  - name: Water
+    description: Operations about water.
   - name: Auth
     description: Auth operations.
 servers:
   - url: http://localhost:8080
-  - url: https://nodejs-hw-mongodb-3-c2jd.onrender.com
+  - url: https://final-project-mobileteam-backend.onrender.com
 paths:
   /contacts:
     post:
@@ -33,3 +33,11 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+    cookieAuthUserId:
+      type: apiKey
+      in: cookie
+      name: sessionId
+    cookieAuthRefreshToken:
+      type: apiKey
+      in: cookie
+      name: refreshToken
