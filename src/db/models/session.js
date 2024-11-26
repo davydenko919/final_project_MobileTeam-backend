@@ -28,6 +28,8 @@ const sessionSchema = new mongoose.Schema({
   }
 );
 
+console.log();
+
 
 const Session = mongoose.model("Session", sessionSchema);
 
