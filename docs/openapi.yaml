@@ -34,6 +34,9 @@ paths:
   /user/refresh:
     post:
       $ref: ../swagger/paths/user/postRefresh.yaml
+  /user/participants:
+    get:
+      $ref: ../swagger/paths/user/getNumberOfUsers.yaml
 components:
   securitySchemes:
     bearerAuth:

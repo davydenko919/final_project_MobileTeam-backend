@@ -8,7 +8,8 @@ import {
   requestResetEmailController,
   infoController,
   resetPasswordController,
-  patchUserController
+  patchUserController,
+  totalNumberUsers
 } from '../controllers/userController.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { registerSchema, loginSchema } from '../validation/user.js';
@@ -45,6 +46,11 @@ userRouter.get(
   ctrlWrapper(infoController),
 );
 
+userRouter.get(
+  '/participants',
+
+  ctrlWrapper(totalNumberUsers),
+);
 
 userRouter.patch(
   '/',

@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { registerUser, loginUser, logoutUser, refreshSession, requestResetToken, getUser, patchUser } from '../services/userService.js';
+import { registerUser, loginUser, logoutUser, refreshSession, requestResetToken, getUser, patchUser, getNumberOsUsers } from '../services/userService.js';
 import { resetPassword } from '../services/userService.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
@@ -47,6 +47,17 @@ export async function infoController(req, res, next) {
     status: 200,
     message: "Successfully found user!",
     data: user,
+  });
+}
+
+export async function totalNumberUsers(req, res, next) {
+
+  const totalNumber = await getNumberOsUsers();
+
+  res.json({
+    status: 200,
+    message: "Successfully found number of users!",
+    data: totalNumber,
   });
 }
 
