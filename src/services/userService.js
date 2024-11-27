@@ -69,6 +69,13 @@ export async function getUser(userId) {
   return user;
 }
 
+export async function getNumberOsUsers() {
+
+  const number = await User.countDocuments();
+
+  return number;
+}
+
 export const patchUser = async (id, payload, options = {}) => {
   const rawResult = await User.findOneAndUpdate(
     { _id: id },
