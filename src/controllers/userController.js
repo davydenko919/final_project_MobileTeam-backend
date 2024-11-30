@@ -7,6 +7,7 @@ export async function registerController(req, res) {
   const payload = {
     email: req.body.email,
     password: req.body.password,
+    
   };
 
   const registeredUser = await registerUser(payload);

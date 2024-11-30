@@ -42,38 +42,57 @@ responses:
             data:
               type: object
               required:
+                - _id
                 - name
                 - email
                 - gender
-                - _id
                 - createdAt
                 - updatedAt
+                - sportHours
+                - weight
+                - photo
               properties:
-                name:
-                  type: string
-                  example: 'usser'
-                  description: "The name of the registered user."
-                email:
-                  type: string
-                  example: 'usser@gmail.com'
-                  description: "The email address of the registered user."
-                gender:
-                  type: string
-                  example: 'woman'
-                  description: "The gender of the registered user."
                 _id:
                   type: string
-                  example: '67460c7d58af97571b29b893'
-                  description: "The unique identifier of the user."
+                  example: '6745fd4047be484107443d1c'
+                name:
+                  type: string
+                  example: 'testname'
+                email:
+                  type: string
+                  format: email
+                  example: 'user@gmail.com'
+                gender:
+                  type: string
+                  enum:
+                    - man
+                    - woman
+                  example: 'man'
                 createdAt:
                   type: string
                   format: date-time
-                  example: '2024-11-26T17:59:25.698Z'
-                  description: "Timestamp when the user was created."
+                  example: '2024-11-26T16:54:24.922Z'
                 updatedAt:
                   type: string
                   format: date-time
-                  example: '2024-11-26T17:59:25.698Z'
-                  description: "Timestamp when the user was last updated."
+                  example: '2024-11-26T17:06:35.823Z'
+                sportHours:
+                  type: integer
+                  example: 31
+                  description: 'Total hours spent on sports activities.'
+                weight:
+                  type: number
+                  format: float
+                  example: 13
+                  description: 'User weight in kilograms.'
+                wewaterNormaight:
+                  type: number
+                  example: 1500
+                  description: 'Users water norm in ml.'
+                photo:
+                  type: string
+                  format: uri
+                  example: 'https://res.cloudinary.com/dnepourus/image/upload/v1732640796/ffzgnlx8rznuauv2etlj.jpg'
+                  description: 'URL of the user profile photo.'
   '409':
     $ref: '../../components/responses/409.yaml'

@@ -48,7 +48,7 @@ responses:
                   example: 'user@gmail.com'
                 gender:
                   type: string
-                  enum: 
+                  enum:
                     - man
                     - woman
                   example: 'man'
@@ -69,6 +69,10 @@ responses:
                   format: float
                   example: 13
                   description: 'User weight in kilograms.'
+                wewaterNormaight:
+                  type: number
+                  example: 1500
+                  description: 'Users water norm in ml.'
                 photo:
                   type: string
                   format: uri

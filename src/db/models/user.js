@@ -19,13 +19,20 @@ const userSchema = new mongoose.Schema({
     },
     weight: {
         type: Number,
+        default: 60
     },
     sportHours: {
         type: Number,
+        default: 1
     },
     photo: {
         type: String,
+        default: "https://res.cloudinary.com/dnepourus/image/upload/v1732976930/uposr5jajefqkveozjyo.jpg"
     },
+    waterNorma: {
+        type: Number,
+        default: 1500
+    }
 },{
     versionKey: false, timestamps: true,
 });
