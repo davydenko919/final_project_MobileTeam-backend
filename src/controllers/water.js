@@ -3,13 +3,13 @@ import { addWater, deleteWater, patchWater } from "../services/water.js";
 
 export const addWaterController = async (req, res) => {
     const userId = req.user._id;
-    const { amount, time, day, month, year } = req.body;
+    const { amount, date } = req.body;
 
-    if (!amount || !time || !day || !month || !year) {
+    if (!amount || !date) {
         throw createHttpError(400, "Bad request, please fill all fields!");
     }
 
-    const addedWater = await addWater(userId, amount, time, day, month, year);
+    const addedWater = await addWater(userId, amount, date);
 
     res.status(201).json({
         status: 201,
@@ -56,7 +56,7 @@ export const getWaterController = async (req, res, next) => {
     res.json({
         status: 200,
         message: "Successfully get water!",
-        data:[
+        data: [
             { amount: 120, userId: 1, date: "2024-11-01T12:34:56" },
             { amount: 340, userId: 2, date: "2024-11-02T09:45:23" },
             { amount: 280, userId: 3, date: "2024-11-03T15:12:34" },
@@ -88,7 +88,7 @@ export const getWaterController = async (req, res, next) => {
             { amount: 240, userId: 29, date: "2024-11-29T10:45:56" },
             { amount: 260, userId: 30, date: "2024-11-30T12:35:43" },
 
-          ],
+        ],
     });
 };
 
