@@ -17,23 +17,24 @@ export async function registerController(req, res) {
 
 export async function loginController(req, res) {
   const { email, password } = req.body;
-  const session = await loginUser(email, password);
+  const userInfo = await loginUser(email, password);
 
-  res.cookie('refreshToken', session.refreshToken, {
+  res.cookie('refreshToken', userInfo.session.refreshToken, {
     httpOnly: true,
-    expires: session.refreshTokenValidUntil,
+    expires: userInfo.session.refreshTokenValidUntil,
   });
 
-  res.cookie('sessionId', session._id, {
+  res.cookie('sessionId', userInfo.session._id, {
     httpOnly: true,
-    expires: session.refreshTokenValidUntil,
+    expires: userInfo.session.refreshTokenValidUntil,
   });
 
   res.status(201).send({
     status: 200,
     message: 'Login completed',
     data: {
-      accessToken: session.accessToken,
+      accessToken: userInfo.session.accessToken,
+      user: userInfo.user,
     },
   });
 }
@@ -63,7 +64,6 @@ export async function totalNumberUsers(req, res, next) {
 }
 
 export const patchUserController = async (req, res, next) => {
-  // const { id } = req.params;
   const { user: { id: id } } = req;
 
 
