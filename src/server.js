@@ -3,11 +3,11 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
-// import waterRoutes from './routers/water.js';
+import waterRoutes from './routers/water.js';
 import userRoutes from "./routers/user.js";
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
-// import { auth } from './middlewares/auth.js';
+import { auth } from './middlewares/auth.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/index.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
@@ -35,7 +35,7 @@ app.use(
 
 app.use(cookieParser());
 
-// app.use('/water', auth, waterRoutes);
+app.use('/water', auth, waterRoutes);
 
 app.use('/user', userRoutes);
 
