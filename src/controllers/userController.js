@@ -7,7 +7,7 @@ export async function registerController(req, res) {
   const payload = {
     email: req.body.email,
     password: req.body.password,
-    
+
   };
 
   const registeredUser = await registerUser(payload);
@@ -108,21 +108,21 @@ export const patchUserController = async (req, res, next) => {
 
 
 export async function logoutController(req, res) {
-    const { sessionId } = req.cookies;
-    console.log(req);
+  const { sessionId } = req.cookies;
+  console.log(req);
 
-    if (sessionId == null){
+  if (sessionId == null) {
       throw createHttpError(401, "Logout failed: You are not logged in");
-    }
+  }
 
-    if (typeof sessionId === "string"){
+  if (typeof sessionId === "string") {
       await logoutUser(sessionId);
-    }
+  }
 
-    res.clearCookie("refreshToken");
-    res.clearCookie("sessionId");
+  res.clearCookie("refreshToken");
+  res.clearCookie("sessionId");
 
-    res.status(204).end();
+  res.status(204).end();
 }
 
 export async function refreshController(req, res) {

@@ -95,8 +95,8 @@ export const patchUser = async (id, payload, options = {}) => {
   };
 };
 
-export function logoutUser(sessionId){
-  Session.deleteOne({_id: sessionId});
+export async function logoutUser(sessionId) {
+  await Session.deleteOne({ _id: sessionId });
 }
 
 export async function refreshSession(sessionId, refreshToken){
