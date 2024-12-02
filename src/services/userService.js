@@ -36,23 +36,21 @@ export async function loginUser(email, password) {
    const user = await User.findOne({ email });
 
    if (user === null) {
-     // throw createHttpError(404, "User not found");
      throw createHttpError(404, 'User not found');
    }
 
    const isMatch = await bcrypt.compare(password, user.password);
 
    if (isMatch !== true) {
-     // throw createHttpError(401, "Unauthorized");
      throw createHttpError(401, 'Email or password is incorrect');
    }
 
-   Session.deleteOne({userId: user._id});
+   await Session.deleteOne({userId: user._id});
 
    const accessToken = crypto.randomBytes(30).toString('base64');
    const refreshToken = crypto.randomBytes(30).toString('base64');
 
-   return Session.create({
+   return await Session.create({
       userId: user._id,
       accessToken,
       refreshToken,
