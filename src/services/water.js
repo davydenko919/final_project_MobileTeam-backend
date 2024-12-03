@@ -25,12 +25,15 @@ export const deleteWater = async (userId, id) => {
 
 
 export const getWaterByDay = async (userId, date) => {
-    const start = new Date(date.setHours(0, 0, 0, 0));
-    const end = new Date(date.setHours((23, 59, 59, 999)));
+    const startOfDay = new Date(date.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(date.setHours((23, 59, 59, 999)));
 
     const records = await Water.find({
         userId,
-        date: { $gte: start, $lte: end }
+        date: {
+            $gte: startOfDay,
+            $lte: endOfDay
+        }
     });
 
     const totalAmount = records.reduce((acc, record) => acc + record.amount, 0);
@@ -50,4 +53,20 @@ export const getWaterByDay = async (userId, date) => {
         percentage: `${percentage}%`,
         dailyNorma
     };
+};
+
+
+export const getWaterByMonth = async (userId, date) => {
+    const inputDate = new Date(date);
+    const startOfMonth = new Date(inputDate.getFullYear(), inputDate.getMonth(), 1);
+    const endOfMonth = new Date(inputDate.getFullYear(), inputDate.getMonth() + 1, 1);
+
+    const records = Water.find({
+        userId,
+        date: {
+            $gte: startOfMonth,
+            $lt: endOfMonth
+        }
+    });
+    return records;
 };

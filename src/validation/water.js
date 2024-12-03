@@ -8,7 +8,7 @@ export const addWaterSchema = Joi.object({
     }),
     date: Joi.string().pattern(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).required().messages({
         "string.base": "Date must be a string",
-        "string.pattern.base": "Date must be 'YYYY-MM-DDThh-mm-ss' ",
+        "string.pattern.base": "Date must be 'YYYY-MM-DD hh:mm:ss' ",
         "any.required": "Date is required",
     }),
 });
@@ -21,6 +21,6 @@ export const patchWaterSchema = Joi.object({
     }),
     date: Joi.string().pattern(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/).messages({
         "string.base": "Date must be a string",
-        "string.pattern.base": "Date must be 'YYYY-MM-DDThh-mm-ss' ",
+        "string.pattern.base": "Date must be 'YYYY-MM-DD hh:mm:ss' ",
     })
 });
