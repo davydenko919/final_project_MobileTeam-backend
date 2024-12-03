@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://res.cloudinary.com/dnepourus/image/upload/v1732976930/uposr5jajefqkveozjyo.jpg"
     },
-    waterNorma: {
+    waterNorm: {
         type: Number,
         default: 1500
     }

@@ -69,7 +69,7 @@ responses:
                   format: float
                   example: 13
                   description: 'User weight in kilograms.'
-                wewaterNormaight:
+                waterNorm:
                   type: number
                   example: 1500
                   description: 'Users water norm in ml.'
