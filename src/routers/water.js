@@ -1,7 +1,7 @@
 import express from "express";
 import { validateBody } from "../middlewares/validateBody.js";
 import { ctrlWrapper } from "../utils/ctrlWrapper.js";
-import { addWaterController, deleteWaterController, patchWaterController, getWaterController } from "../controllers/water.js";
+import { addWaterController, deleteWaterController, patchWaterController, getWaterController, getWaterByDayController, getWaterByMonthController } from "../controllers/water.js";
 import { addWaterSchema, patchWaterSchema } from "../validation/water.js";
 import { isValidId } from "../middlewares/isValidId.js";
 
@@ -29,6 +29,16 @@ waterRouter.delete(
     "/:id",
     isValidId,
     ctrlWrapper(deleteWaterController)
+);
+
+waterRouter.get(
+    "/day",
+    ctrlWrapper(getWaterByDayController)
+);
+
+waterRouter.get(
+    "/month",
+    ctrlWrapper(getWaterByMonthController)
 );
 
 waterRouter.get(

@@ -1,5 +1,5 @@
 import createHttpError from "http-errors";
-import { addWater, deleteWater, patchWater } from "../services/water.js";
+import { addWater, deleteWater, getWaterByDay, patchWater } from "../services/water.js";
 
 export const addWaterController = async (req, res) => {
     const userId = req.user._id;
@@ -50,7 +50,31 @@ export const deleteWaterController = async (req, res, next) => {
     res.status(204).send();
 };
 
+export const getWaterByDayController = async (req, res, next) => {
+    const userId = req.user._id;
+    const date = req.body;
 
+    if (!date) {
+        throw createHttpError(400, "Date is required!");
+    }
+
+    const data = await getWaterByDay(userId, date);
+
+    res.json({
+        status: 200,
+        message: "Successfully fetched water data!",
+        data: {
+            records: data.records,
+            totalAmount: data.totalAmount,
+            percentage: data.percentage,
+            dailyNorma: data.dailyNorma,
+        }
+    });
+};
+
+export const getWaterByMonthController = async (req, res, next) => {
+
+};
 
 export const getWaterController = async (req, res, next) => {
     res.json({
