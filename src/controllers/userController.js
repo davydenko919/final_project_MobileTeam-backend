@@ -109,8 +109,6 @@ export const patchUserController = async (req, res, next) => {
 
 export async function logoutController(req, res) {
   const { sessionId } = req.cookies;
-  console.log(req);
-
   if (sessionId == null) {
       throw createHttpError(401, "Logout failed: You are not logged in");
   }
