@@ -56,6 +56,10 @@ userRouter.patch(
   '/',
   auth,
   jsonParser,
+  (req, res, next) => {
+    console.log('Request:', req);
+    next(); // Не забувай викликати `next()`, щоб передати управління наступному middleware
+  },
   upload.single('photo'),
   validateBody(updateUserSchema),
   ctrlWrapper(patchUserController),

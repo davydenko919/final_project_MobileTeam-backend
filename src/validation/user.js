@@ -26,5 +26,5 @@ export const updateUserSchema = Joi.object({
     weight: Joi.number(),
     sportHours: Joi.number(),
     waterNorm: Joi.number(),
-    photo: Joi.string().uri(),
+    photo: Joi.string(),
   });
