@@ -22,10 +22,10 @@ requestBody:
             description: 'Amount of water'
             type: number
             example: 250
-          date:
-            description: 'Date of water record'
-            type: string
-            example: '2024-12-04 12:12:12'
+          # date:
+          #   description: 'Date of water record'
+          #   type: string
+          #   example: '2024-12-04 12:12:12'
 responses:
   '200':
     description: Edit water record

@@ -2,7 +2,7 @@ import createHttpError from "http-errors";
 import { addWater, deleteWater, getWaterByDay, getWaterByMonth, patchWater } from "../services/water.js";
 
 export const addWaterController = async (req, res) => {
-    const userId = req.user._id;
+    const userId = req.user.id;
     const { amount, date } = req.body;
 
     if (!amount || !date) {
@@ -18,11 +18,28 @@ export const addWaterController = async (req, res) => {
     });
 };
 
+// export const patchWaterController = async (req, res, next) => {
+//     const userId = req.user._id;
+//     const { id } = req.params;
+
+//     const result = await patchWater(userId, id, { ...req.body });
+
+//     if (!result) {
+//         next(createHttpError(404, "Water record not found!"));
+//         return;
+//     }
+
+//     res.json({
+//         status: 200,
+//         message: "Successfully edit water record!",
+//         data: result,
+//     });
+// };
+
 export const patchWaterController = async (req, res, next) => {
-    const userId = req.user._id;
     const { id } = req.params;
 
-    const result = await patchWater(userId, id, { ...req.body });
+    const result = await patchWater(id, { ...req.body });
 
     if (!result) {
         next(createHttpError(404, "Water record not found!"));
@@ -36,11 +53,24 @@ export const patchWaterController = async (req, res, next) => {
     });
 };
 
+// export const deleteWaterController = async (req, res, next) => {
+//     const userId = req.user._id;
+//     const { id } = req.params;
+
+//     const result = await deleteWater(userId, id);
+
+//     if (!result) {
+//         next(createHttpError(404, "Water record not found!"));
+//         return;
+//     }
+
+//     res.status(204).send();
+// };
+
 export const deleteWaterController = async (req, res, next) => {
-    const userId = req.user._id;
     const { id } = req.params;
 
-    const result = await deleteWater(userId, id);
+    const result = await deleteWater(id);
 
     if (!result) {
         next(createHttpError(404, "Water record not found!"));

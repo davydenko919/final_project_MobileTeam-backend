@@ -8,9 +8,18 @@ export const addWater = async (userId, amount, date) => {
 };
 
 
-export const patchWater = async (userId, id, payload) => {
+// export const patchWater = async (userId, id, payload) => {
+//     const editedWater = await Water.findOneAndUpdate(
+//         { _id: id, userId },
+//         payload,
+//         { new: true });
+
+//     return editedWater;
+// };
+
+export const patchWater = async (id, payload) => {
     const editedWater = await Water.findOneAndUpdate(
-        { _id: id, userId },
+        { _id: id},
         payload,
         { new: true });
 
@@ -18,10 +27,16 @@ export const patchWater = async (userId, id, payload) => {
 };
 
 
-export const deleteWater = async (userId, id) => {
-    const deletedWater = await Water.findByIdAndDelete({ _id: id, userId });
+// export const deleteWater = async (userId, id) => {
+//     const deletedWater = await Water.findByIdAndDelete({ _id: id, userId });
+//     return deletedWater;
+// };
+
+export const deleteWater = async (id) => {
+    const deletedWater = await Water.findByIdAndDelete({ _id: id});
     return deletedWater;
 };
+
 
 
 export const getWaterByDay = async (userId, date) => {
