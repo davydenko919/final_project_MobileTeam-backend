@@ -15,7 +15,6 @@ import { TEMPLATES_DIR } from '../constants/index.js';
 import handlebars from 'handlebars';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { log } from "node:console";
 
 export async function registerUser(payload){
    const user = await User.findOne({email: payload.email});
