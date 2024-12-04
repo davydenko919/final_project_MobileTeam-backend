@@ -5,8 +5,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description:
-    This is a documentation of TrackWaterApp
+  description: This is a documentation of TrackWaterApp
 tags:
   - name: Water
     description: Operations about water.
@@ -37,6 +36,20 @@ paths:
   /user/participants:
     get:
       $ref: ../swagger/paths/user/getNumberOfUsers.yaml
+  /water:
+    post:
+      $ref: ../swagger/paths/water/post.yaml
+  /water/{id}:
+    patch:
+      $ref: ../swagger/paths/water/{id}/patch.yaml
+    delete:
+      $ref: ../swagger/paths/water/{id}/delete.yaml
+  /water/day/{date}:
+    get:
+      $ref: ../swagger/paths/water/day/get.yaml
+  /water/month/{date}:
+    get:
+      $ref: ../swagger/paths/water/month/get.yaml
 components:
   securitySchemes:
     bearerAuth:
