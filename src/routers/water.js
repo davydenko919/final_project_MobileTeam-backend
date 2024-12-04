@@ -32,12 +32,12 @@ waterRouter.delete(
 );
 
 waterRouter.get(
-    "/day",
+    "/day/:date",
     ctrlWrapper(getWaterByDayController)
 );
 
 waterRouter.get(
-    "/month",
+    "/month/:date",
     ctrlWrapper(getWaterByMonthController)
 );
 
