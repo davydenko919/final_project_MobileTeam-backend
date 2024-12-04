@@ -1,5 +1,3 @@
-import createHttpError from "http-errors";
-import { User } from "../db/models/user.js";
 import { Water } from "../db/models/water.js";
 
 export const addWater = async (userId, amount, date) => {
@@ -8,14 +6,6 @@ export const addWater = async (userId, amount, date) => {
 };
 
 
-// export const patchWater = async (userId, id, payload) => {
-//     const editedWater = await Water.findOneAndUpdate(
-//         { _id: id, userId },
-//         payload,
-//         { new: true });
-
-//     return editedWater;
-// };
 
 export const patchWater = async (id, payload) => {
     const editedWater = await Water.findOneAndUpdate(
@@ -26,49 +16,11 @@ export const patchWater = async (id, payload) => {
     return editedWater;
 };
 
-
-// export const deleteWater = async (userId, id) => {
-//     const deletedWater = await Water.findByIdAndDelete({ _id: id, userId });
-//     return deletedWater;
-// };
-
 export const deleteWater = async (id) => {
     const deletedWater = await Water.findByIdAndDelete({ _id: id});
     return deletedWater;
 };
 
-
-
-// export const getWaterByDay = async (userId, date) => {
-//     const startOfDay = new Date(`${date}T00:00:00`);
-//     const endOfDay = new Date(`${date}T23:59:59`);
-
-//     const records = await Water.find({
-//         userId,
-//         date: {
-//             $gte: startOfDay,
-//             $lte: endOfDay
-//         }
-//     });
-
-//     const totalAmount = records.reduce((acc, record) => acc + record.amount, 0);
-
-//     const user = User.findById({ userId });
-//     if (!user) {
-//         throw createHttpError(404, "User not found");
-//     }
-
-//     const dailyNorma = user.waterNorma;
-
-//     const percentage = Math.round((totalAmount / dailyNorma) * 100);
-
-//     return {
-//         records,
-//         totalAmount,
-//         percentage: `${percentage}%`,
-//         dailyNorma
-//     };
-// };
 export const getWaterByDay = async (userId, date) => {
     const startOfDay = `${date}T00:00:00`;
     const endOfDay = `${date}T23:59:59`;
@@ -80,7 +32,6 @@ export const getWaterByDay = async (userId, date) => {
             $lte: endOfDay,
         },
     });
-
 
     return records;
 };
