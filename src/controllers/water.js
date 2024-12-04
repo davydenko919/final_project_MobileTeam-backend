@@ -82,7 +82,7 @@ export const deleteWaterController = async (req, res, next) => {
 
 export const getWaterByDayController = async (req, res, next) => {
     const { user: { id: userId } } = req;
-    let date = req.params.date.slice(0, 10);
+    const date = req.params.date.slice(0, 10);
 
     if (!date) {
         throw createHttpError(400, "Date is required!");
@@ -98,19 +98,19 @@ export const getWaterByDayController = async (req, res, next) => {
 };
 
 export const getWaterByMonthController = async (req, res, next) => {
-    const userId = req.user._id;
-    const date = req.params.slice(0, 7);
+    const { user: { id: userId } } = req;
+    const date = req.params.date.slice(0, 7);
 
     if (!date) {
         throw createHttpError(400, "Date is required!");
     }
 
-    const result = await getWaterByMonth(userId, date);
+    const data = await getWaterByMonth(userId, date);
 
     res.json({
         status: 200,
-        message: "Successfully fetched water data!",
-        data: result
+        message: "Successfully fetched water data by month!",
+        data: data
     });
 };
 

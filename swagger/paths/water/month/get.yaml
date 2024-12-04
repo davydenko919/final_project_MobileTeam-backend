@@ -11,10 +11,10 @@ parameters:
     required: true
     schema:
       type: string
-      example: '2024-12-04 12:12:12'
+      example: '2024-12'
 responses:
   '200':
-    description: 'Get water record by month'
+    description: 'Successfully fetched water data by month!'
     content:
       application/json:
         schema:
@@ -29,10 +29,11 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully fetched water data!
+              example: Successfully fetched water data by month!
             data:
-              type: object
-              $ref: '../../../components/schemas/water.yaml'
+              type: array
+              items:
+                $ref: '../../../components/schemas/water.yaml'
   '404':
     $ref: '../../../components/responses/404.yaml'
   '401':

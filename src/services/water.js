@@ -86,16 +86,12 @@ export const getWaterByDay = async (userId, date) => {
 };
 
 export const getWaterByMonth = async (userId, date) => {
-    const inputDate = new Date(date);
-    const startOfMonth = new Date(inputDate.getFullYear(), inputDate.getMonth(), 1);
-    const endOfMonth = new Date(inputDate.getFullYear(), inputDate.getMonth() + 1, 1);
-
-    const records = Water.find({
+    const records = await Water.find({
         userId,
         date: {
-            $gte: startOfMonth,
-            $lt: endOfMonth
+            $regex: `^${date}`,
         }
     });
+
     return records;
 };

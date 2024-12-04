@@ -680,7 +680,7 @@
                   "date": {
                     "description": "Date of water record",
                     "type": "string",
-                    "example": "2024-12-04 12:12:12"
+                    "example": "2024-12-04T12:12:12"
                   }
                 }
               }
@@ -866,7 +866,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-12-04 12:12:12"
+              "example": "2024-12-04"
             }
           }
         ],
@@ -889,11 +889,13 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully fetched water data!"
+                      "example": "Successfully fetched water data by day!"
                     },
                     "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/water"
+                      }
                     }
                   }
                 }
@@ -932,13 +934,13 @@
             "required": true,
             "schema": {
               "type": "string",
-              "example": "2024-12-04 12:12:12"
+              "example": "2024-12"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Get water record by month",
+            "description": "Successfully fetched water data by month!",
             "content": {
               "application/json": {
                 "schema": {
@@ -955,11 +957,13 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully fetched water data!"
+                      "example": "Successfully fetched water data by month!"
                     },
                     "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/water"
+                      }
                     }
                   }
                 }
@@ -1177,21 +1181,45 @@
       "water": {
         "type": "object",
         "required": [
+          "_id",
+          "userId",
           "amount",
-          "date"
+          "date",
+          "createdAt",
+          "updatedAt"
         ],
         "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Unique identifier for the object",
+            "example": "6750a95ebc9d40a99d34db91"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User identifier associated with the water consumption entry",
+            "example": "6750a66a4f76dc21c8828509"
+          },
           "amount": {
             "type": "number",
-            "description": "Amount of water must be in milliliters between 50 and 15000",
+            "description": "Amount of water in milliliters between 50 and 15000",
             "minimum": 50,
             "maximum": 15000,
-            "example": 250
+            "example": 2440
           },
           "date": {
             "type": "string",
-            "description": "The date and time of water consumption. Must be 'DD-MM-YYYY hh:mm:ss' format",
-            "example": "23-10-2024 14:20:00"
+            "description": "The date and time of water consumption in 'YYYY-MM-DDTHH:mm:ss' format",
+            "example": "2024-12-04T12:12:12"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Timestamp when the record was created",
+            "example": "2024-12-04T19:11:26.388Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Timestamp when the record was last updated",
+            "example": "2024-12-04T19:11:26.388Z"
           }
         }
       }
