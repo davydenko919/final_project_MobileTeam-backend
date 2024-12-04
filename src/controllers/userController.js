@@ -126,7 +126,7 @@ export const patchUserController = async (req, res, next) => {
 export async function logoutController2point0(req, res) {
   const { user: { id } } = req;
 
-  if (id == null) {
+  if (!id) {
     throw createHttpError(401, "Logout failed: You are not logged in");
   }
 
