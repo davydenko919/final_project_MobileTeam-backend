@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { registerUser, loginUser, logoutUser, refreshSession, requestResetToken, getUser, patchUser, getNumberOsUsers } from '../services/userService.js';
+import { registerUser, loginUser, logoutUser2point0, refreshSession, requestResetToken, getUser, patchUser, getNumberOsUsers } from '../services/userService.js';
 import { resetPassword } from '../services/userService.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
@@ -107,21 +107,37 @@ export const patchUserController = async (req, res, next) => {
 };
 
 
-export async function logoutController(req, res) {
-  const { sessionId } = req.cookies;
-  if (sessionId == null) {
-      throw createHttpError(401, "Logout failed: You are not logged in");
+// export async function logoutController(req, res) {
+//   const { sessionId } = req.cookies;
+//   if (sessionId == null) {
+//       throw createHttpError(401, "Logout failed: You are not logged in");
+//   }
+
+//   if (typeof sessionId === "string") {
+//       await logoutUser(sessionId);
+//   }
+
+//   res.clearCookie("refreshToken");
+//   res.clearCookie("sessionId");
+
+//   res.status(204).end();
+// }
+
+export async function logoutController2point0(req, res) {
+  const { user: { id } } = req;
+
+  if (id == null) {
+    throw createHttpError(401, "Logout failed: You are not logged in");
   }
 
-  if (typeof sessionId === "string") {
-      await logoutUser(sessionId);
-  }
+  await logoutUser2point0(id);
 
   res.clearCookie("refreshToken");
   res.clearCookie("sessionId");
 
   res.status(204).end();
 }
+
 
 export async function refreshController(req, res) {
   const { sessionId, refreshToken } = req.cookies;

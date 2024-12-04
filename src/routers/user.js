@@ -3,7 +3,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
   registerController,
   loginController,
-  logoutController,
+  logoutController2point0,
   refreshController,
   requestResetEmailController,
   infoController,
@@ -61,10 +61,16 @@ userRouter.patch(
   ctrlWrapper(patchUserController),
 );
 
+// userRouter.post(
+//   '/logout',
+//   auth,
+//   ctrlWrapper(logoutController),
+// );
+
 userRouter.post(
-  '/logout',
+  '/logout2point0',
   auth,
-  ctrlWrapper(logoutController),
+  ctrlWrapper(logoutController2point0),
 );
 
 userRouter.post(

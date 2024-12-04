@@ -15,6 +15,7 @@ import { TEMPLATES_DIR } from '../constants/index.js';
 import handlebars from 'handlebars';
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import { log } from "node:console";
 
 export async function registerUser(payload){
    const user = await User.findOne({email: payload.email});
@@ -98,9 +99,16 @@ export const patchUser = async (id, payload, options = {}) => {
   };
 };
 
-export async function logoutUser(sessionId) {
-  await Session.deleteOne({ _id: sessionId });
+// export async function logoutUser(sessionId) {
+//   await Session.deleteOne({ _id: sessionId });
+// }
+
+export async function logoutUser2point0(id) {
+  console.log(id);
+
+  await Session.deleteMany({ userId: id });
 }
+
 
 export async function refreshSession(sessionId, refreshToken){
   const session = await Session.findById(sessionId);
