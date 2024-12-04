@@ -21,7 +21,7 @@ requestBody:
           date:
             description: 'Date of water record'
             type: string
-            example: '2024-12-04 12:12:12'
+            example: '2024-12-04T12:12:12'
 responses:
   '201':
     description: Create water record

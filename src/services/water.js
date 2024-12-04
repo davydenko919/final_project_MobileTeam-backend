@@ -39,37 +39,51 @@ export const deleteWater = async (id) => {
 
 
 
+// export const getWaterByDay = async (userId, date) => {
+//     const startOfDay = new Date(`${date}T00:00:00`);
+//     const endOfDay = new Date(`${date}T23:59:59`);
+
+//     const records = await Water.find({
+//         userId,
+//         date: {
+//             $gte: startOfDay,
+//             $lte: endOfDay
+//         }
+//     });
+
+//     const totalAmount = records.reduce((acc, record) => acc + record.amount, 0);
+
+//     const user = User.findById({ userId });
+//     if (!user) {
+//         throw createHttpError(404, "User not found");
+//     }
+
+//     const dailyNorma = user.waterNorma;
+
+//     const percentage = Math.round((totalAmount / dailyNorma) * 100);
+
+//     return {
+//         records,
+//         totalAmount,
+//         percentage: `${percentage}%`,
+//         dailyNorma
+//     };
+// };
 export const getWaterByDay = async (userId, date) => {
-    const startOfDay = new Date(date.setHours(0, 0, 0, 0));
-    const endOfDay = new Date(date.setHours((23, 59, 59, 999)));
+    const startOfDay = `${date}T00:00:00`;
+    const endOfDay = `${date}T23:59:59`;
 
     const records = await Water.find({
         userId,
         date: {
             $gte: startOfDay,
-            $lte: endOfDay
-        }
+            $lte: endOfDay,
+        },
     });
 
-    const totalAmount = records.reduce((acc, record) => acc + record.amount, 0);
 
-    const user = User.findById({ userId });
-    if (!user) {
-        throw createHttpError(404, "User not found");
-    }
-
-    const dailyNorma = user.waterNorma;
-
-    const percentage = Math.round((totalAmount / dailyNorma) * 100);
-
-    return {
-        records,
-        totalAmount,
-        percentage: `${percentage}%`,
-        dailyNorma
-    };
+    return records;
 };
-
 
 export const getWaterByMonth = async (userId, date) => {
     const inputDate = new Date(date);
