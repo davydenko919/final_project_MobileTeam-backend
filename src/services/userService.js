@@ -103,8 +103,6 @@ export const patchUser = async (id, payload, options = {}) => {
 // }
 
 export async function logoutUser2point0(id) {
-  console.log(id);
-
   await Session.deleteMany({ userId: id });
 }
 

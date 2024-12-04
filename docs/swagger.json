@@ -548,6 +548,29 @@
         }
       }
     },
+    "/user/logout2point0": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "logout",
+        "operationId": "logoutController2point0",
+        "description": "Logout user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully logout!"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
     "/user/refresh": {
       "post": {
         "tags": [
