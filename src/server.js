@@ -23,7 +23,11 @@ const app = express();
 app.use('/uploads', express.static(UPLOAD_DIR));
 app.use('/api-docs', swaggerDocs());
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://final-project-mobileteam-backend.onrender.com",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use(
     pino({
