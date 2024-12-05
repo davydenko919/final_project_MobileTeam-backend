@@ -98,13 +98,13 @@ export const patchUser = async (id, payload, options = {}) => {
   };
 };
 
-// export async function logoutUser(sessionId) {
-//   await Session.deleteOne({ _id: sessionId });
-// }
-
-export async function logoutUser2point0(id) {
-  await Session.deleteMany({ userId: id });
+export async function logoutUser(sessionId) {
+  await Session.deleteOne({ _id: sessionId });
 }
+
+// export async function logoutUser2point0(id) {
+//   await Session.deleteMany({ userId: id });
+// }
 
 
 export async function refreshSession(sessionId, refreshToken){
