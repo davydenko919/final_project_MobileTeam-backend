@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { registerUser, loginUser, logoutUser, refreshSession, requestResetToken, getUser, patchUser, getNumberOsUsers } from '../services/userService.js';
+import { registerUser, loginUser, logoutUser2point0, refreshSession, requestResetToken, getUser, patchUser, getNumberOsUsers } from '../services/userService.js';
 import { resetPassword } from '../services/userService.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
@@ -107,40 +107,40 @@ export const patchUserController = async (req, res, next) => {
 };
 
 
-export async function logoutController(req, res) {
-  const { sessionId } = req.cookies;
-  console.log("sessionId", sessionId);
+// export async function logoutController(req, res) {
+//   const { sessionId } = req.cookies;
+//   console.log("sessionId", sessionId);
 
-  // if (!sessionId) {
-  //     throw createHttpError(401, "Logout failed: You are not logged in");
-  // }
-
-  if (typeof sessionId === "string") {
-      console.log(  "logoutUser work"    );
-
-      await logoutUser(sessionId);
-  }
-
-  res.clearCookie("refreshToken");
-  res.clearCookie("sessionId");
-
-  res.status(204).end();
-}
-
-// export async function logoutController2point0(req, res) {
-//   const { user: { id } } = req;
-
-//   if (!id) {
-//     throw createHttpError(401, "Logout failed: You are not logged in");
+//   if (!sessionId) {
+//       throw createHttpError(401, "Logout failed: You are not logged in");
 //   }
 
-//   await logoutUser2point0(id);
+//   if (typeof sessionId === "string") {
+//       console.log(  "logoutUser work"    );
+
+//       await logoutUser(sessionId);
+//   }
 
 //   res.clearCookie("refreshToken");
 //   res.clearCookie("sessionId");
 
 //   res.status(204).end();
 // }
+
+export async function logoutController2point0(req, res) {
+  const { user: { id } } = req;
+
+  if (!id) {
+    throw createHttpError(401, "Logout failed: You are not logged in");
+  }
+
+  await logoutUser2point0(id);
+
+  res.clearCookie("refreshToken");
+  res.clearCookie("sessionId");
+
+  res.status(204).end();
+}
 
 
 export async function refreshController(req, res) {
