@@ -30,9 +30,9 @@ paths:
   /user/logout:
     post:
       $ref: ../swagger/paths/user/postLogout.yaml
-  /user/logout2point0:
-    post:
-      $ref: ../swagger/paths/user/postlogout2point0.yaml
+  # /user/logout2point0:
+  #   post:
+  #     $ref: ../swagger/paths/user/postlogout2point0.yaml
   /user/refresh:
     post:
       $ref: ../swagger/paths/user/postRefresh.yaml

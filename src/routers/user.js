@@ -68,7 +68,7 @@ userRouter.patch(
 // );
 
 userRouter.post(
-  '/logout2point0',
+  '/logout',
   auth,
   ctrlWrapper(logoutController2point0),
 );
